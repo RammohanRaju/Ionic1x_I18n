@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function($scope, $translate) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -50,6 +50,29 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
+  
+	//expose translation via `$translate` service
+     $translate('PLAYLISTS.TITLE').then(function (playlists_itle) {
+	   $scope.playlists_itle = playlists_itle;
+	 }, function (translationId) {
+	   $scope.playlists_itle = translationId;
+	 });
+	 $translate('HEADLINE').then(function (headline) {
+	   $scope.headline = headline;
+	 }, function (translationId) {
+	   $scope.headline = translationId;
+	 });
+	 $translate('PARAGRAPH').then(function (paragraph) {
+	   $scope.paragraph = paragraph;
+	 }, function (translationId) {
+	   $scope.paragraph = translationId;
+	 });
+	 $translate('NAMESPACE.PARAGRAPH').then(function (anotherOne) {
+	   $scope.namespaced_paragraph = anotherOne;
+	 }, function (translationId) {
+	   $scope.namespaced_paragraph = translationId;
+	 });
+  
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {

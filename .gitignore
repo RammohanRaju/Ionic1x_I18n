@@ -10,3 +10,5 @@ plugins/
 \.classpath
 
 \.project
+
+www/lib/

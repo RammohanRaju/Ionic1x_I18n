@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate']);
 
-.run(function($ionicPlatform) {
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,9 +20,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       StatusBar.styleDefault();
     }
   });
-})
+});
 
-.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
     .state('app', {
@@ -71,3 +71,33 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
 });
+
+var translationsEN = {
+		  HEADLINE: 'What an awesome module!',
+		  PARAGRAPH: 'Srsly!',
+		  NAMESPACE: {
+		    PARAGRAPH: 'And it comes with awesome features!'
+		  },
+		  PLAYLISTS: {
+			  TITLE: 'Test Playlists Translation EN'
+		  }
+};
+
+var translationsDE = {
+		  HEADLINE: 'What an awesome module! DE',
+		  PARAGRAPH: 'Srsly! DE',
+		  NAMESPACE: {
+		    PARAGRAPH: 'And it comes with awesome features! DE'
+		  },
+		  PLAYLISTS: {
+			  TITLE: 'Test Playlists Translation DE'
+		  }
+};
+
+app.config(['$translateProvider', function ($translateProvider) {
+	  // add translation tables
+	  $translateProvider.translations('en', translationsEN);
+	  $translateProvider.translations('de', translationsDE);
+	  $translateProvider.preferredLanguage('en');
+	  $translateProvider.fallbackLanguage('en');
+	}]);
